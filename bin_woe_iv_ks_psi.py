@@ -76,6 +76,8 @@ def calc_ks_qcut(df, response='target', score='score', good=0, bad=1, name='scor
     ks_table['cum_bad_pct']=ks_table[bad].cumsum()/ks_table[bad].sum()
     ks_table['ks']=np.abs(ks_table['cum_good_pct']-ks_table['cum_bad_pct'])
     return ks_table
+
+
 #woe
 
 #iv，woe
@@ -105,10 +107,10 @@ print (neg.shape, pos.shape, data.shape)
 raw_data = data.copy()
 for i in raw_data[variable_list].columns:
     column_name = i + '_cat'
-    bincut = raw_data[i].dropna().quantile([i / 10.0 for i inrange(10)]).drop_duplicates().values
+    bincut = raw_data[i].dropna().quantile([i / 10.0 for i in range(10)]).drop_duplicates().values
     raw_data[column_name] = 'missing'
-    for j inrange(len(bincut) - 1):
-        raw_data[column_name][(raw_data[i] = bincut[j])]=str(j) + ":[" + str(bincut[j]) + "," + str(bincut[j + 1]) + ")"
+    for j in range(len(bincut) - 1):
+        raw_data[column_name][(raw_data[i] == bincut[j])]=str(j) + ":[" + str(bincut[j]) + "," + str(bincut[j + 1]) + ")"
         raw_data[column_name][raw_data[i] >= bincut[len(bincut) - 1]] = str(j + 1) + ":>=" + str(
             bincut[len(bincut) - 1])
         bin_data = raw_data.iloc[:, data.shape[1] - 1:raw_data.shape[1]]
@@ -136,6 +138,7 @@ result_iv = pd.DataFrame(iv['iv'].groupby(iv['variable_name']).sum())
 result_iv.columns = ['variable_name', 'iv']
 result_iv = result_iv.sort_values(by='iv', ascending=False)
 result_iv.to_csv('result_iv.csv')
+
 #psi
 
 
