@@ -3,6 +3,7 @@ import math
 from scipy import stats
 from sklearn.utils.multiclass import type_of_target
 
+
 class WOE:
     def __init__(self):
         self._WOE_MIN = -20
@@ -158,12 +159,17 @@ class WOE:
     @property
     def WOE_MIN(self):
         return self._WOE_MIN
+
     @WOE_MIN.setter
     def WOE_MIN(self, woe_min):
         self._WOE_MIN = woe_min
+
     @property
     def WOE_MAX(self):
         return self._WOE_MAX
+
     @WOE_MAX.setter
     def WOE_MAX(self, woe_max):
         self._WOE_MAX = woe_max
+
+
