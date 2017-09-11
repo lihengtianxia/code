@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<params>
+    <!-- 生成时间：2017-07-10 -->
+    <!-- 入参定义 -->
+    <inparams type="map">
+        <inparam>
+            <name>chzz01101020</name>
+            <dName></dName>
+            <!-- type : index / field-->
+            <type>index</type>
+            <!-- datatype : double/int/string/boolean-->
+            <datatype>double</datatype>
+            <defaultValue>-999</defaultValue>
+            <description>chzz01101020</description>
+        </inparam>
+        <inparam>
+            <name>cazz00001020</name>
+            <dName></dName>
+            <!-- type : index / field-->
+            <type>index</type>
+            <!-- datatype : double/int/string/boolean-->
+            <datatype>double</datatype>
+            <defaultValue>-999</defaultValue>
+            <description>cazz00001020</description>
+        </inparam>
+        <inparam>
+            <name>abzz00101010</name>
+            <dName></dName>
+            <!-- type : index / field-->
+            <type>index</type>
+            <!-- datatype : double/int/string/boolean-->
+            <datatype>double</datatype>
+            <defaultValue>-999</defaultValue>
+            <description>abzz00101010</description>
+        </inparam>
+    </inparams>
+
+    <!-- 出参定义 -->
+    <outparams>
+        <outparam>
+            <name>l_chzz01101020</name>
+            <dName>描述2</dName>
+            <!-- datatype : double / string-->
+            <datatype>double</datatype>
+            <description>l_chzz01101020</description>
+        </outparam>
+        <outparam>
+            <name>l_cazz00001020</name>
+            <dName>描述2</dName>
+            <!-- datatype : double / string-->
+            <datatype>double</datatype>
+            <description>l_cazz00001020</description>
+        </outparam>
+        <outparam>
+            <name>l_abzz00101010</name>
+            <dName>描述2</dName>
+            <!-- datatype : double / string-->
+            <datatype>double</datatype>
+            <description>l_abzz00101010</description>
+        </outparam>
+        <outparam>
+            <name>credit_score</name>
+            <dName>描述2</dName>
+            <!-- datatype : double / string-->
+            <datatype>double</datatype>
+            <description>credit_score</description>
+        </outparam>
+    </outparams>
+</params>

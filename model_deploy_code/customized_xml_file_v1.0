@@ -1,0 +1,46 @@
+# 需要下载xml_type.xlsx附件
+  
+def customized_prod_params_spec_xml(out_path, data_path):
+    import pandas as pd
+    df=pd.read_excel(data_path)
+    f = open(out_path, 'w+')
+    print >>f, '<?xml version="1.0" encoding="UTF-8"?>'
+    print  >>f,'<params>'
+    import time
+    print  >>f,'    <!-- 生成时间：'+time.strftime('%Y-%m-%d %HH-%MM',time.localtime(time.time()))+' -->'
+    print  >>f,'    <!-- 入参定义 -->'
+    print  >>f,'    <inparams type="map">'
+    for i in range(df.shape[0]):
+        if pd.isnull(df['input'][i])!=True:
+            print  >>f,'        <inparam>'
+            print  >>f,'            <name>'+df['input'][i].lower()+'</name>'
+            print  >>f,'            <dName></dName>'
+            print  >>f,'            <!-- type : index / field-->'
+            print  >>f,'            <type>'+df['type'][i].lower()+'</type>'
+            print  >>f,'            <!-- datatype : double/int/string/boolean-->'
+            print  >>f,'            <defaultValue>-999</defaultValue>'
+            print  >>f,'            <datatype>'+df['input_datatype'][i].lower()+'</datatype>'
+            print  >>f,'            <description>'+df['desc'][i].encode('utf8')+'</description>'
+            print  >>f,'        </inparam>'
+    print >>f, '    </inparams>'
+    print >>f, ''
+ 
+    print  >>f, '    <!-- 出参定义 -->'
+    print  >>f, '    <outparams>'
+    for i in range(df.shape[0]):
+        if df['input'][i]!='':
+            print  >>f,'        <outparam>'
+            print  >>f,'            <name>'+df['output'][i].lower()+'</name>'
+            print  >>f,'            <dName></dName>'
+            print  >>f,'            <!-- datatype : string / string-->'
+            print  >>f,'            <datatype>'+df['output_datatype'][i].lower()+'</datatype>'
+            print  >>f,'            <description>'+df['desc'][i].encode('utf8')+'</description>'
+            print  >>f,'        </outparam>'
+    print  >>f,'    </outparams>'
+    print  >>f,'</params>'
+    f.close()
+ 
+customized_prod_params_spec_xml(
+    out_path=filepath+'/projects/模型平台/模型部署文件/渤海银行/params_spec.xml',
+    data_path=filepath+"/projects/模型平台/模型部署文件/渤海银行/xml_type.xlsx"
+)

@@ -1,0 +1,107 @@
+# 增加总分和小分同时输出选项 out_method='subscore_score'
+ 
+import sys
+import os
+ 
+reload(sys)
+sys.setdefaultencoding("utf-8")
+ 
+#### 2.获取文件路径
+filepath = os.path.split(os.path.realpath('__file__'))[0]
+def prod_params_spec_xml(path, in_params, out_method='model_score'):
+    f = open(path, 'w+')
+    print >>f, '<?xml version="1.0" encoding="UTF-8"?>'
+    print  >>f,'<params>'
+    import time
+    print  >>f,'    <!-- 生成时间：'+time.strftime('%Y-%m-%d',time.localtime(time.time()))+' -->'
+    print  >>f,'    <!-- 入参定义 -->'
+    print  >>f,'    <inparams type="map">'
+    for param in in_params:
+        print  >>f,'        <inparam>'
+        print  >>f,'            <name>'+param.lower()+'</name>'
+        print  >>f,'            <dName></dName>'
+        print  >>f,'            <!-- type : index / field-->'
+        print  >>f,'            <type>index</type>'
+        print  >>f,'            <!-- datatype : double/int/string/boolean-->'
+        print  >>f,'            <datatype>double</datatype>'
+        print  >>f,'            <defaultValue>-999</defaultValue>'
+        print  >>f,'            <description>'+param.lower()+'</description>'
+        print  >>f,'        </inparam>'
+    print >>f, '    </inparams>'
+    print >>f, ''
+ 
+    print  >>f, '    <!-- 出参定义 -->'
+    print  >>f, '    <outparams>'
+    if out_method=='label':
+        out_params=["l_"+x.lower() for x in in_params]
+        for params in out_params:
+            print  >>f,'        <outparam>'
+            print  >>f,'            <name>'+params.lower()+'</name>'
+            print  >>f,'            <dName>描述2</dName>'
+            print  >>f,'            <!-- datatype : string / string-->'
+            print  >>f,'            <datatype>double</datatype>'
+            print  >>f,'            <description>'+params.lower()+'</description>'
+            print  >>f,'        </outparam>'
+        print  >>f,'    </outparams>'
+        print  >>f,'</params>'
+ 
+    elif out_method=='woe_score':
+        out_params=[x.lower()+"_woe" for x in in_params]
+        out_params.append('credit_score')
+        for params in out_params:
+            print  >>f,'        <outparam>'
+            print  >>f,'            <name>'+params.lower()+'</name>'
+            print  >>f,'            <dName>描述2</dName>'
+            print  >>f,'            <!-- datatype : double / string-->'
+            print  >>f,'            <datatype>double</datatype>'
+            print  >>f,'            <description>'+params.lower()+'</description>'
+            print  >>f,'        </outparam>'
+        print  >>f,'    </outparams>'
+        print  >>f,'</params>'
+ 
+    elif out_method=='subscore_score':
+        out_params=[x.lower()+"_score" for x in in_params]
+        out_params.append('credit_score')
+        for params in out_params:
+            print  >>f,'        <outparam>'
+            print  >>f,'            <name>'+params.lower()+'</name>'
+            print  >>f,'            <dName>描述2</dName>'
+            print  >>f,'            <!-- datatype : double / string-->'
+            print  >>f,'            <datatype>double</datatype>'
+            print  >>f,'            <description>'+params.lower()+'</description>'
+            print  >>f,'        </outparam>'
+        print  >>f,'    </outparams>'
+        print  >>f,'</params>'
+ 
+    elif out_method=='label_score':
+        out_params=["l_"+x.lower() for x in in_params]
+        out_params.append('credit_score')
+        for params in out_params:
+            print  >>f,'        <outparam>'
+            print  >>f,'            <name>'+params.lower()+'</name>'
+            print  >>f,'            <dName>描述2</dName>'
+            print  >>f,'            <!-- datatype : double / string-->'
+            print  >>f,'            <datatype>double</datatype>'
+            print  >>f,'            <description>'+params.lower()+'</description>'
+            print  >>f,'        </outparam>'
+        print  >>f,'    </outparams>'
+        print  >>f,'</params>'
+    else:
+        out_params=['credit_score']
+        # out_params.append('')
+        for params in out_params:
+            print  >>f,'        <outparam>'
+            print  >>f,'            <name>'+params.lower()+'</name>'
+            print  >>f,'            <dName>描述2</dName>'
+            print  >>f,'            <!-- datatype : double / string-->'
+            print  >>f,'            <datatype>double</datatype>'
+            print  >>f,'            <description>'+params.lower()+'</description>'
+            print  >>f,'        </outparam>'
+        print  >>f,'    </outparams>'
+        print  >>f,'</params>'
+    f.close()
+  
+ 
+prod_params_spec_xml(path=filepath+'/projects/模型平台/模型部署文件/掌众/params_spec.xml',
+                     out_method='subscore_score', in_params=['ABZZ00101011','EBZZ04000020',
+'BAZZ00130031'])

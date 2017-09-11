@@ -1,0 +1,34 @@
+
+
+一、打包文件说明。(直接打包，不要将文件放入文件夹再打包）
+1、 __init__.py （必须）
+2、 params_spec.xml （必须）
+3、 execute_model.py  （必须，入口文件不可以修改）
+4、 handle_data.py （必须，模型操作文件，处理的入口方法handle,入参为list/dict）
+5、 prepare_test.py （不需要打包，本地预执行的测试脚本）
+6、 prepare_test_data (不需要打包，本地预执行的测试入参）
+7、 其余模型文件及处理数据逻辑的python,如模板中的feidai_bin.xlsx
+
+二、prepare_test.py 使用说明
+防止模型上传出现预执行失败问题
+1、测试入参写在prepare_test_data
+2、python prepare_test.py执行预执行
+
+三、params_spec.xml 字段说明
+1、inparams
+type | 必填 | list(表示handle_data.py中handle入参类型为list)/map(表示handle_data.py中handle入参类型为dict)
+2、inparam
+name | 必填 | 入参
+dName | 非必填 | 入参显示名称
+type | 必填 | 入参类型，index（指标）/ field(字段)
+datatype | 最好填 | 数据类型（默认string），double/int/string/boolean
+description | 非必填 | 描述
+3、outparam
+字段说明同inparam一致
+
+四、handle_data.py 注意事项
+1、所有编码格式统一为utf-8
+2、获取文件路径 filepath = os.path.split(os.path.realpath(__file__))[0] 需要加载文件的路径前必须加上 filepath+'/'
+3、必须有handlel方法，格式def handle(inparams)。
+4、方法handle有且只有一个入参（list/dict其中一种类型）
+5、方法handle出参必须为dict类型
