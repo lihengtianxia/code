@@ -32,7 +32,7 @@ coef = [-0.618789996, -0.519537384, -0.496929395, -0.513141626, -0.471811306, -0
 a = 410.4236223
 b = 72.13475204
 w0 = -2.348014302
-s0 = a + b * w0
+s0 = a - b * w0
 #x1
 woe_m_ratio_lessthanA=0.61913676
 woe_m_ratio_AtoB=0.174441007
@@ -148,7 +148,7 @@ woe_i_length_last2BtoC=-0.075607561
 woe_i_length_last2morethanC=-0.31996089
 
 def getscore(i,x):
-    score=round(b*coef[i]*x,7)
+    score=round((-b)*coef[i]*x,7)
     return score
 
 df=pd.read_csv("c:/bin_train_modified.csv")
